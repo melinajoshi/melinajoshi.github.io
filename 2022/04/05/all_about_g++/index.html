@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>More on g++ - Rashik</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Rashik"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rashik"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="g++ is a tool for preprocessing, compilation, assembly and linking of source code to generate an executable file or library."><meta property="og:type" content="blog"><meta property="og:title" content="More on g++"><meta property="og:url" content="http://rashik.info.np/2022/04/05/all_about_g++/"><meta property="og:site_name" content="Rashik"><meta property="og:description" content="g++ is a tool for preprocessing, compilation, assembly and linking of source code to generate an executable file or library."><meta property="og:locale" content="en_US"><meta property="og:image" content="http://rashik.info.np/images/more_on_g++/cpp_files.png"><meta property="og:image" content="http://rashik.info.np/images/more_on_g++/static_lib.png"><meta property="article:published_time" content="2022-04-05T06:23:22.000Z"><meta property="article:modified_time" content="2022-10-06T14:53:03.574Z"><meta property="article:author" content="Rashik Shrestha"><meta property="article:tag" content="C++"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://rashik.info.np/images/more_on_g++/cpp_files.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://rashik.info.np/2022/04/05/all_about_g++/"},"headline":"More on g++","image":["http://rashik.info.np/images/more_on_g++/cpp_files.png","http://rashik.info.np/images/more_on_g++/static_lib.png"],"datePublished":"2022-04-05T06:23:22.000Z","dateModified":"2022-10-06T14:53:03.574Z","author":{"@type":"Person","name":"Rashik Shrestha"},"publisher":{"@type":"Organization","name":"Rashik","logo":{"@type":"ImageObject","url":"http://rashik.info.np/img/logo.svg"}},"description":"g++ is a tool for preprocessing, compilation, assembly and linking of source code to generate an executable file or library."}</script><link rel="canonical" href="http://rashik.info.np/2022/04/05/all_about_g++/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Rashik" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">About Me</a><a class="navbar-item" href="/cv">CV</a><a class="navbar-item" href="/categories/Project/">Projects</a><a class="navbar-item" href="/categories/KnowledgeBase">Knowledge Base</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/rashikshrestha"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-04-05T06:23:22.000Z" title="4/5/2022, 12:08:22 PM">2022-04-05</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-10-06T14:53:03.574Z" title="10/6/2022, 8:38:03 PM">2022-10-06</time></span><span class="level-item"><a class="link-muted" href="/categories/KnowledgeBase/">KnowledgeBase</a></span><span class="level-item">8 minutes read (About 1206 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">More on g++</h1><div class="content"><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><code>g++</code> is a tool for preprocessing, compilation, assembly and linking of source code to generate an executable file or library.</p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>As easy as:</p>
+<p><code>sudo apt update</code></p>
+<p><code>sudo apt install g++</code></p>
+<h2 id="General-Syntax"><a href="#General-Syntax" class="headerlink" title="General Syntax"></a>General Syntax</h2><ul>
+<li><p>General syntax to run g++ compiler is:</p>
+<p>  <code>g++ &lt;flags_with_params&gt; &lt;source_files&gt;</code></p>
+</li>
+<li><p>The above command takes a bunch of source files along with some flags and generates an executable file or a library file.</p>
+</li>
+<li><p>Flags are very important because they can control the way compilation occurs.</p>
+</li>
+<li><p>For example, if we have a single source file <code>main.cpp</code> and need to generate an executable file named <code>out</code>, the basic syntax for this task is <code>g++ main.cpp -o out</code></p>
+</li>
+<li><p>Here, <code>main.cpp</code> is a source file and <code>-o</code> is a flag to specify the output filename. <code>out</code> is the name of the output executable file.</p>
+</li>
+<li><p>Command can be as complex as <code>g++ -Wall -std=c++14 -I/some/path/to/include/dir  -O3 -c -fpermissive -fPIE -o objectfile.o sourcefile1.cpp sourcefile2.cpp sourcefile2.cpp -L/path/to/library/dir -lsomelibrary1 lsomelibrary2</code></p>
+</li>
+<li><p>Here, <code>-W -std -O -c -f -o -L -l</code> are the flags along with their parameters and  <code>sourcefile1.cpp sourcefile2.cpp sourcefile2.cpp</code> are three source files.</p>
+</li>
+</ul>
+<h2 id="Some-important-flags"><a href="#Some-important-flags" class="headerlink" title="Some important flags"></a>Some important flags</h2><ul>
+<li><code>-o</code> Specifies the output filename</li>
+<li><code>-I</code> Specifies the dir to look for header files</li>
+<li><code>-L</code> Specifies the dir to look for libraries</li>
+<li><code>-l</code> Specifies the name of a library to link to</li>
+<li><code>-g</code> To enable debugging</li>
+<li><code>-std</code> Specifies the C++ language standard</li>
+<li><code>-O</code> Specifies the Optimization level</li>
+<li><code>-W</code> Specifies the Warning option</li>
+</ul>
+<h2 id="Order-doesn’t-matter-except-in-few-cases"><a href="#Order-doesn’t-matter-except-in-few-cases" class="headerlink" title="Order doesn’t matter (except in few cases)"></a>Order doesn’t matter (except in few cases)</h2><ul>
+<li><p><code>flags</code> and <code>source files</code> can be <strong>written in any order</strong>. (with some exceptions while linking libraries, discussed below)</p>
+</li>
+<li><p>Take a simple C++ code <code>main.cpp</code></p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Hello, world!&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Any of the following commands can be used to generate the executable file <code>main</code>  </p>
+<p>  <code>g++ main.cpp -o main</code></p>
+<p>  <code>g++ -o main main.cpp</code></p>
+<p>  <code>g++ main.cpp -omain</code></p>
+<p>  <code>g++ -omain main.cpp </code></p>
+</li>
+<li><p>As you can see, it doesn’t matter in what order you keep <code>-o</code> flag and source file <code>main.cpp</code></p>
+</li>
+<li><p>Moreover, it doen’t matter if you keep a space after <code>-o</code> flag or not. </p>
+</li>
+<li><p>Now, lets add some more flags: <code>-Wall</code> to show all the warnings, <code>-g</code> to enable debugging, and <code>-std</code> to specify C++ standard.</p>
+</li>
+<li><p>All the commands below produces identical output:</p>
+<p>  <code>g++ -Wall -g -std=c++14 main.cpp -o main</code></p>
+<p>  <code>g++ -Wall main.cpp -g -omain -std=c++14</code></p>
+<p>  <code>g++ main.cpp -Wall -omain -g -std=c++14</code></p>
+</li>
+<li><p>Now, lets try this with more than one source file</p>
+</li>
+</ul>
+<p style="text-align:center;">
+    <img src="/images/more_on_g++/cpp_files.png" width="600" alt="Multiple files">
+</p>
+
+<ul>
+<li><p>We can compile this with any of following commands:</p>
+<p>  <code>g++ main.cpp add.cpp subtract.cpp -o main</code> (Simplest way)</p>
+<p>  <code>g++ -g -std=c++14 -Wall main.cpp add.cpp subtract.cpp -o main</code> (With some flags)</p>
+<p>  <code>g++ -Wall add.cpp -std=c++14 -o main main.cpp -g subtract.cpp</code> (Jumble up everything and it still works)</p>
+</li>
+</ul>
+<h2 id="Creating-Library"><a href="#Creating-Library" class="headerlink" title="Creating Library"></a>Creating Library</h2><ul>
+<li>Executable file is a standalone file, which can be executed i.e run as a program. Whereas a library is a collection of stuff that can be invoked from the executable files.</li>
+<li>All the examples above show how to create an executable file.</li>
+<li>There are two types of library:<ul>
+<li>Static Library</li>
+<li>Dynamic Library</li>
+</ul>
+</li>
+</ul>
+<h3 id="Creating-Static-Library"><a href="#Creating-Static-Library" class="headerlink" title="Creating Static Library"></a>Creating Static Library</h3><ul>
+<li>Static library is nothing but a precompiled source file that can be linked to generate an executable file or other library.</li>
+</ul>
+<p style="text-align:center;">
+    <img src="/images/more_on_g++/static_lib.png" width="600" alt="Static Library">
+</p>
+
+<ul>
+<li><p>First flow chart shows how an executable is generated by processing all the source files via the whole pipeline.</p>
+</li>
+<li><p>Second flow chart shows object files are generated in intermediate steps and are linked later to generate an executable file.</p>
+</li>
+<li><p>These object files can be viewed as static libraries that are linked to main.o to produce an executable file.</p>
+</li>
+<li><p>This can be done using following commands:</p>
+<p>  <code>g++ -c main.cpp add.cpp subtract.cpp</code> (Generate Object files)</p>
+<p>  <code>g++ main.o add.o subtract.o -o main</code> (Generate executable from object files)</p>
+</li>
+<li><p>Moreover, we can mix up source files and object files while generating executable file:</p>
+<p>  <code>g++ -c add.cpp subtract.cpp</code></p>
+<p>  <code>g++ main.cpp add.o subtract.o -o main</code></p>
+</li>
+<li><p>Here, add.o and subtract.o are the object files acting as library for main.cpp</p>
+</li>
+<li><p>Now, lets try to bundle up these object files into a single file, which we can call <strong>Static Library</strong></p>
+<p>  <code>g++ -c add.cpp subtract.cpp </code> (first generate add.o and subtract.o)</p>
+<p>  <code>ar rc my_first_library add.o subtract.o</code> (Bundle&#x2F;Archive the object files to a single file <strong>my_first_library</strong>)</p>
+<p>  <code>g++ main.cpp my_first_library -o main</code> (Now, use this library to produce the executable file)</p>
+</li>
+<li><p>Thats it! You have sucessfully created and used your first Static Library.</p>
+</li>
+<li><p><code>ar</code> is called <strong>archiver</strong>. A tool used to create, modify, and extract from archives.</p>
+</li>
+<li><p>You can see the list of files in archive using: <code>ar -t my_first_library</code></p>
+</li>
+</ul>
+<p><strong>Still some work left …</strong></p>
+<ul>
+<li><p>Well, now let’s look into some naming conventions and standard ways of linking a static library.</p>
+</li>
+<li><p>Generally, static library is named as: <code>lib&lt;library_name&gt;.a</code></p>
+</li>
+<li><p>And is linked as:</p>
+<p>  <code>g++ &lt;source_files&gt; -o &lt;output_filename&gt; -L&lt;path/to/lib&gt; -l&lt;name_of_lib&gt;</code></p>
+</li>
+<li><p>So, correct way of linking a static library in above example is:</p>
+<p>  <code>g++ -c add.cpp subtract.cpp </code> (first generate add.o and subtract.o)</p>
+<p>  <code>ar rc libmy_first_library.a add.o subtract.o</code> (Bundle&#x2F;Archive the object files to a single file)</p>
+<p>  <code>g++ main.cpp -o main -L. -lmy_first_library</code> (Now, use this library to produce the executable file)</p>
+</li>
+</ul>
+<h3 id="Creating-Dynamic-Library"><a href="#Creating-Dynamic-Library" class="headerlink" title="Creating Dynamic Library"></a>Creating Dynamic Library</h3><ul>
+<li><p>Dynamic library are not linked with the executable file during compilation process. They are linked during execution. i.e. linked dynamically.</p>
+</li>
+<li><p>Dynamic library is named as: <code>lib&lt;library_name&gt;.so</code></p>
+</li>
+<li><p>Commands to create dynamic library for above example are:</p>
+<p>  <code>g++ -c add.cpp subtract.cpp</code> (First generate object files as before)</p>
+<p>  <code>g++ -shared add.o subtract.o -o libmy_first_shared_library.so</code> (generate a shared library form the object files)</p>
+<p>  <code>g++ main.cpp -o main -L. -lmy_first_shared_library</code> (Now create an executable by linking the dynamic library)</p>
+</li>
+<li><p>Now, if you run <code>./main</code>, it will probably give an error.</p>
+</li>
+<li><p>That’s because the executable <code>main</code> needs to know where to search for library <code>libmy_first_shared_library.so</code>.</p>
+</li>
+<li><p>We can add the search path to the environment variable <code>LD_LIBRARY_PATH</code> so that <code>main</code> finds it.</p>
+<p>  <code>export LD_LIBRARY_PATH=/path/to/dynamic_library</code></p>
+</li>
+<li><p>Now, when you run <code>./main</code>, it should work perfectly.</p>
+</li>
+<li><p>You can also see all the dynamic dependencies&#x2F;libraries linked to <code>main</code> by using command <code>ldd main</code>. i.e. List Dynamic Dependencies of executable file <code>main</code></p>
+</li>
+</ul>
+<h2 id="Order-Matters-here"><a href="#Order-Matters-here" class="headerlink" title="Order Matters here.."></a>Order Matters here..</h2><ul>
+<li><p>While generating the executable <code>main</code> by linking static or dynamic library in above example, we have used:</p>
+<p>  <code>g++ main.cpp -o main -L. -lname_of_lib</code></p>
+</li>
+<li><p>But as the flags are position independent, we may try to compile with:</p>
+<p>  <code>g++ -o main -L. -lname_of_lib main.cpp</code></p>
+</li>
+<li><p>But this time, it shows error stating <code>undefined reference</code></p>
+</li>
+<li><p>The source file <code>main.cpp</code> uses the functions <code>add</code> and <code>subtract</code>, which is found inside the linked library.</p>
+</li>
+<li><p><code>g++</code> is designed in such a way that dependent stuff must be mentioned beforehand.</p>
+</li>
+<li><p>As <code>main.cpp</code> is dependent on <code>-lname_of_lib</code> , <code>main.cpp</code> must be written before <code>-lname_of_lib</code></p>
+</li>
+<li><p>Other flags can be kept anywhere.</p>
+</li>
+</ul>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/C/">C++</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/09/30/precision-livestock-farming/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Precision Livestock Farming</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2019/12/09/gesture_to_speech/"><span class="level-item">Sign Language gestures to Speech Gloves</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-09-30T15:07:12.000Z">2022-09-30</time></p><p class="title"><a href="/2022/09/30/ml-model-visualization-using-netron/">ML model visualization using Netron</a></p><p class="categories"><a href="/categories/KnowledgeBase/">KnowledgeBase</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-09-30T15:02:16.000Z">2022-09-30</time></p><p class="title"><a href="/2022/09/30/steps-of-cpp-codes-compilation/">Steps of C++ codes compilation</a></p><p class="categories"><a href="/categories/KnowledgeBase/">KnowledgeBase</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-09-30T14:58:25.000Z">2022-09-30</time></p><p class="title"><a href="/2022/09/30/pointers-and-references/">Pointers and References</a></p><p class="categories"><a href="/categories/KnowledgeBase/">KnowledgeBase</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-09-30T14:52:35.766Z">2022-09-30</time></p><p class="title"><a href="/2022/09/30/const-keyword-in-cpp/">&#039;const&#039; keyword in C++</a></p><p class="categories"><a href="/categories/KnowledgeBase/">KnowledgeBase</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-09-30T14:49:53.186Z">2022-09-30</time></p><p class="title"><a href="/2022/09/30/precision-livestock-farming/">Precision Livestock Farming</a></p><p class="categories"><a href="/categories/Project/">Project</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Rashik" height="28"></a><p class="is-size-7"><span>&copy; 2022 Rashik Shrestha</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/rashikshrestha"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
